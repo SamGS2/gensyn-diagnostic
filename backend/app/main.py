@@ -54,7 +54,7 @@ async def test_anthropic():
     )
     return {"status": "connected", "response": message.content[0].text}
 
-    import anthropic
+    
 
 @app.get("/test/anthropic")
 async def test_anthropic():
