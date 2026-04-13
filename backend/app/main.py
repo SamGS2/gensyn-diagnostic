@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 from supabase import create_client
-import anthropic
+
 
 load_dotenv()
 
@@ -44,24 +44,3 @@ async def test_supabase():
     return {"status": "connected", "data": result.data}
 
 
-@app.get("/test/anthropic")
-async def test_anthropic():
-    client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-    message = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=50,
-        messages=[{"role": "user", "content": "Say 'connection successful' and nothing else."}]
-    )
-    return {"status": "connected", "response": message.content[0].text}
-
-    
-
-@app.get("/test/anthropic")
-async def test_anthropic():
-    client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-    message = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=50,
-        messages=[{"role": "user", "content": "Say 'haiku connected' and nothing else."}]
-    )
-    return {"haiku": message.content[0].text}
